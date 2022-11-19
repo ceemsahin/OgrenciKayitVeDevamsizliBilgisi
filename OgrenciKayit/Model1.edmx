@@ -1,0 +1,146 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="OgrenciKayitModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Devamsizlik">
+          <Key>
+            <PropertyRef Name="DevamId" />
+          </Key>
+          <Property Name="DevamId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Gun" Type="date" />
+          <Property Name="Durumu" Type="nvarchar" MaxLength="50" />
+          <Property Name="OgrenciId" Type="int" />
+        </EntityType>
+        <EntityType Name="Ogrenci">
+          <Key>
+            <PropertyRef Name="OgrenciId" />
+          </Key>
+          <Property Name="OgrenciId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OgrenciAdi" Type="nvarchar" MaxLength="50" />
+          <Property Name="CepNo" Type="nvarchar" MaxLength="50" />
+          <Property Name="TCNo" Type="nvarchar" MaxLength="50" />
+          <Property Name="Cinsiyet" Type="bit" />
+          <Property Name="Adres" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <Association Name="FK__Devamsizl__Ogren__267ABA7A">
+          <End Role="Ogrenci" Type="Self.Ogrenci" Multiplicity="0..1" />
+          <End Role="Devamsizlik" Type="Self.Devamsizlik" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ogrenci">
+              <PropertyRef Name="OgrenciId" />
+            </Principal>
+            <Dependent Role="Devamsizlik">
+              <PropertyRef Name="OgrenciId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="OgrenciKayitModelStoreContainer">
+          <EntitySet Name="Devamsizlik" EntityType="Self.Devamsizlik" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ogrenci" EntityType="Self.Ogrenci" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Devamsizl__Ogren__267ABA7A" Association="Self.FK__Devamsizl__Ogren__267ABA7A">
+            <End Role="Ogrenci" EntitySet="Ogrenci" />
+            <End Role="Devamsizlik" EntitySet="Devamsizlik" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="OgrenciKayitModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Devamsizlik">
+          <Key>
+            <PropertyRef Name="DevamId" />
+          </Key>
+          <Property Name="DevamId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Gun" Type="DateTime" Precision="0" />
+          <Property Name="Durumu" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="OgrenciId" Type="Int32" />
+          <NavigationProperty Name="Ogrenci" Relationship="Self.FK__Devamsizl__Ogren__267ABA7A" FromRole="Devamsizlik" ToRole="Ogrenci" />
+        </EntityType>
+        <EntityType Name="Ogrenci">
+          <Key>
+            <PropertyRef Name="OgrenciId" />
+          </Key>
+          <Property Name="OgrenciId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OgrenciAdi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CepNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TCNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Cinsiyet" Type="Boolean" />
+          <Property Name="Adres" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Devamsizlik" Relationship="Self.FK__Devamsizl__Ogren__267ABA7A" FromRole="Ogrenci" ToRole="Devamsizlik" />
+        </EntityType>
+        <Association Name="FK__Devamsizl__Ogren__267ABA7A">
+          <End Role="Ogrenci" Type="Self.Ogrenci" Multiplicity="0..1" />
+          <End Role="Devamsizlik" Type="Self.Devamsizlik" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ogrenci">
+              <PropertyRef Name="OgrenciId" />
+            </Principal>
+            <Dependent Role="Devamsizlik">
+              <PropertyRef Name="OgrenciId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="OgrenciKayitEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Devamsizlik" EntityType="Self.Devamsizlik" />
+          <EntitySet Name="Ogrenci" EntityType="Self.Ogrenci" />
+          <AssociationSet Name="FK__Devamsizl__Ogren__267ABA7A" Association="Self.FK__Devamsizl__Ogren__267ABA7A">
+            <End Role="Ogrenci" EntitySet="Ogrenci" />
+            <End Role="Devamsizlik" EntitySet="Devamsizlik" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="OgrenciKayitModelStoreContainer" CdmEntityContainer="OgrenciKayitEntities">
+          <EntitySetMapping Name="Devamsizlik">
+            <EntityTypeMapping TypeName="OgrenciKayitModel.Devamsizlik">
+              <MappingFragment StoreEntitySet="Devamsizlik">
+                <ScalarProperty Name="DevamId" ColumnName="DevamId" />
+                <ScalarProperty Name="Gun" ColumnName="Gun" />
+                <ScalarProperty Name="Durumu" ColumnName="Durumu" />
+                <ScalarProperty Name="OgrenciId" ColumnName="OgrenciId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ogrenci">
+            <EntityTypeMapping TypeName="OgrenciKayitModel.Ogrenci">
+              <MappingFragment StoreEntitySet="Ogrenci">
+                <ScalarProperty Name="OgrenciId" ColumnName="OgrenciId" />
+                <ScalarProperty Name="OgrenciAdi" ColumnName="OgrenciAdi" />
+                <ScalarProperty Name="CepNo" ColumnName="CepNo" />
+                <ScalarProperty Name="TCNo" ColumnName="TCNo" />
+                <ScalarProperty Name="Cinsiyet" ColumnName="Cinsiyet" />
+                <ScalarProperty Name="Adres" ColumnName="Adres" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
